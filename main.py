@@ -1,15 +1,30 @@
-from stats import get_num_words, get_char_dict
+from stats import get_num_words, get_char_dict, sort_char_dict
 
 def get_book_text(filepath):
 	with open(filepath) as f:
 		file_contents = f.read()
 	return file_contents
 
+def print_report(book_location, word_count, char_dict_list):
+	print("============ BOOKBOT ============")
+	print(f"Analyzing book found at {book_location}...")
+	print("----------- Word Count ----------")
+	print(f"Found {word_count} total words")
+	print("--------- Character Count -------")
+
+	for char_dict in char_dict_list:
+		if not char_dict["char"].isalpha():
+			continue
+		print(f"{char_dict["char"]}: {char_dict["num"]}")
+
+	print("============= END ===============")
+
 def main():
-	book_text = get_book_text("books/frankenstein.txt")
+	book_location = "books/frankenstein.txt"
+	book_text = get_book_text(book_location)
 	num_words = get_num_words(book_text)
-	print(f"Found {num_words} total words")
 	char_dict = get_char_dict(book_text)
-	print(char_dict)
+	char_dict_list = sort_char_dict(char_dict)
+	print_report(book_location, num_words, char_dict_list)
 
 main()

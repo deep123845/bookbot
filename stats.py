@@ -9,4 +9,16 @@ def get_char_dict(input_string):
 		if not lowercase_char in char_dict:
 			char_dict[lowercase_char] = 0	
 		char_dict[lowercase_char] += 1
-	return char_dict	
+	return char_dict
+
+def sort_on(items):
+	return items["num"]
+
+def sort_char_dict(char_dict):
+	char_dict_list = []
+	for entry in char_dict:
+		entry_dict = {"char": entry, "num": char_dict[entry]}
+		char_dict_list.append(entry_dict)
+	
+	char_dict_list.sort(reverse=True, key=sort_on)
+	return char_dict_list
